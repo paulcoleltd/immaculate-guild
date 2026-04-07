@@ -68,22 +68,61 @@ document.addEventListener('DOMContentLoaded', () => {
     statsObs.observe(statsEl);
   }
 
-  /* ── Form submission handler ────────────────────────────── */
-  const form = document.querySelector('form');
+  /* ── Form submission — Formspree AJAX ──────────────────── */
+  const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
+
+  const form = document.getElementById('quoteForm');
   if (form) {
-    form.addEventListener('submit', e => {
+    form.addEventListener('submit', async e => {
       e.preventDefault();
-      const btn = form.querySelector('button[type="submit"]');
-      const original = btn.innerHTML;
-      btn.innerHTML = 'Sending... ⟳';
+
+      const btn    = document.getElementById('formSubmitBtn');
+      const msgEl  = document.getElementById('formMsg');
+      const orig   = btn.innerHTML;
+
+      // Basic client-side validation
+      const required = form.querySelectorAll('[required]');
+      let valid = true;
+      required.forEach(f => { if (!f.value.trim()) { f.style.borderColor = '#E53E3E'; valid = false; } else { f.style.borderColor = ''; } });
+      if (!valid) {
+        showMsg(msgEl, 'Please fill in all required fields.', '#FEF2F2', '#C53030');
+        return;
+      }
+
+      btn.innerHTML = 'Sending&hellip;';
       btn.disabled = true;
-      // Replace this timeout with actual form submission (Formspree/Netlify)
-      setTimeout(() => {
-        btn.innerHTML = '✓ Quote Request Sent!';
-        btn.style.background = '#10B981';
-        setTimeout(() => { btn.innerHTML = original; btn.disabled = false; btn.style.background = ''; }, 4000);
-      }, 1500);
+
+      try {
+        const res = await fetch(FORMSPREE_ENDPOINT, {
+          method:  'POST',
+          headers: { 'Accept': 'application/json' },
+          body:    new FormData(form)
+        });
+
+        if (res.ok) {
+          form.reset();
+          btn.innerHTML = '✓ Quote Request Sent!';
+          btn.style.background = '#10B981';
+          showMsg(msgEl, 'Thank you — we\'ll be in touch within 3 hours.', '#F0FFF4', '#276749');
+          setTimeout(() => { btn.innerHTML = orig; btn.disabled = false; btn.style.background = ''; msgEl.style.display = 'none'; }, 6000);
+        } else {
+          const data = await res.json();
+          const err  = (data.errors || []).map(x => x.message).join(', ') || 'Submission failed. Please try again.';
+          showMsg(msgEl, err, '#FFF5F5', '#C53030');
+          btn.innerHTML = orig;
+          btn.disabled = false;
+        }
+      } catch {
+        showMsg(msgEl, 'Network error — please call us on 0151 234 5678.', '#FFF5F5', '#C53030');
+        btn.innerHTML = orig;
+        btn.disabled = false;
+      }
     });
+  }
+
+  function showMsg(el, text, bg, color) {
+    el.textContent = text;
+    el.style.cssText = `display:block;background:${bg};color:${color};padding:14px;margin-top:12px;font-size:14px;border-radius:2px;`;
   }
 
 });

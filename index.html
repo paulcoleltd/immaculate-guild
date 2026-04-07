@@ -1047,49 +1047,51 @@
 
       <div class="contact-form reveal">
         <div class="eyebrow" style="margin-bottom:28px">Free Quote Request</div>
-        <form>
+        <form id="quoteForm" novalidate>
           <div class="form-row">
             <div class="form-group">
-              <label class="form-label">Full Name</label>
-              <input type="text" class="form-input" placeholder="Your full name"/>
+              <label class="form-label" for="f-name">Full Name</label>
+              <input id="f-name" type="text" name="name" class="form-input" placeholder="Your full name" required/>
             </div>
             <div class="form-group">
-              <label class="form-label">Phone Number</label>
-              <input type="tel" class="form-input" placeholder="Your number"/>
+              <label class="form-label" for="f-phone">Phone Number</label>
+              <input id="f-phone" type="tel" name="phone" class="form-input" placeholder="Your number" required/>
             </div>
           </div>
           <div class="form-group">
-            <label class="form-label">Email Address</label>
-            <input type="email" class="form-input" placeholder="your@email.com"/>
+            <label class="form-label" for="f-email">Email Address</label>
+            <input id="f-email" type="email" name="email" class="form-input" placeholder="your@email.com" required/>
           </div>
           <div class="form-group">
-            <label class="form-label">Service Required</label>
-            <select class="form-input">
+            <label class="form-label" for="f-service">Service Required</label>
+            <select id="f-service" name="service" class="form-input" required>
               <option value="">Select a service...</option>
-              <option>Residential Cleaning — from £18/hr</option>
-              <option>End of Tenancy — from £175</option>
-              <option>Commercial Cleaning — from £22/hr</option>
-              <option>Office Cleaning — from £22/hr</option>
-              <option>Domestic Home Help — from £18/hr</option>
-              <option>Deep Clean — bespoke quote</option>
+              <option value="Residential Cleaning">Residential Cleaning — from £18/hr</option>
+              <option value="End of Tenancy">End of Tenancy — from £175</option>
+              <option value="Commercial Cleaning">Commercial Cleaning — from £22/hr</option>
+              <option value="Office Cleaning">Office Cleaning — from £22/hr</option>
+              <option value="Domestic Home Help">Domestic Home Help — from £18/hr</option>
+              <option value="Deep Clean">Deep Clean — bespoke quote</option>
             </select>
           </div>
           <div class="form-group">
-            <label class="form-label">Your Postcode</label>
-            <input type="text" class="form-input" placeholder="e.g. L1 1AA"/>
+            <label class="form-label" for="f-postcode">Your Postcode</label>
+            <input id="f-postcode" type="text" name="postcode" class="form-input" placeholder="e.g. L1 1AA"/>
           </div>
           <div class="form-group" style="margin-bottom:8px">
-            <label class="form-label">Tell Us About Your Space</label>
-            <textarea class="form-input" placeholder="Property type, number of rooms, any specific requirements..."></textarea>
+            <label class="form-label" for="f-message">Tell Us About Your Space</label>
+            <textarea id="f-message" name="message" class="form-input" placeholder="Property type, number of rooms, any specific requirements..."></textarea>
           </div>
-          <button type="submit" class="btn btn-gold form-submit">
+          <!-- Honeypot — hidden from real users, catches bots -->
+          <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off"/>
+          <button type="submit" class="btn btn-gold form-submit" id="formSubmitBtn">
             Send My Free Quote Request
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </button>
+          <div id="formMsg" style="display:none;text-align:center;padding:14px;margin-top:12px;font-size:14px;border-radius:2px;"></div>
           <div class="form-note" style="display:flex;flex-direction:column;gap:6px;align-items:center;">
             <span>✦ We respond within 3 hours</span>
-            <span>✦ No hidden fees</span>
-            <span>✦ No hidden fees</span>
+            <span>✦ No hidden fees, no obligation</span>
           </div>
         </form>
       </div>
