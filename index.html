@@ -205,17 +205,7 @@
       color:rgba(255,255,255,.5);
     }
 
-    .scroll-cue {
-      position:absolute; bottom:32px; left:50%; transform:translateX(-50%);
-      display:flex; flex-direction:column; align-items:center; gap:6px; z-index:2;
-    }
-    .scroll-cue span { font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:rgba(255,255,255,.4); }
-    .scroll-line {
-      width:1px; height:48px;
-      background:linear-gradient(to bottom,rgba(201,168,76,.6),transparent);
-      animation:scrollAnim 2.2s ease-in-out infinite;
-    }
-    @keyframes scrollAnim { 0%,100%{opacity:.2;transform:scaleY(.4)} 50%{opacity:1;transform:scaleY(1)} }
+
 
     /* ══════════════════════════════════════════════════════
        TRUST BAR
@@ -698,7 +688,7 @@
       </div>
     </div>
   </div>
-  <div class="scroll-cue"><span>Scroll</span><div class="scroll-line"></div></div>
+
 </section>
 
 <!-- ═══════════ TRUST BAR ═════════════════════════════════ -->
@@ -849,7 +839,7 @@
           </svg>
         </div>
         <h3>Transparent Pricing</h3>
-        <p>Clear quotes in pounds sterling — no hidden fees, no surprises. We give you an honest price upfront and we honour it, always.</p>
+        <p>No hidden fees, no surprises. We give you an honest price upfront and we honour it, always.</p>
       </div>
       <div class="pillar reveal reveal-d2">
         <div class="pillar-icon-wrap"><svg viewBox="0 0 24 24"><path d="M12 22V12M12 12C10 9 7 7 7 5a5 5 0 0110 0c0 2-3 4-5 7z"/><path d="M8 19c-2.5-1-4-3-4-6"/><path d="M16 19c2.5-1 4-3 4-6"/></svg></div>
@@ -865,7 +855,7 @@
   <div class="container">
     <div class="pricing-head reveal">
       <div class="eyebrow">Transparent Pricing</div>
-      <h2 class="section-h">Clear, Honest Prices<br/>in Pounds Sterling</h2>
+      <h2 class="section-h">Clear, Honest Prices</h2>
       <p class="section-sub" style="margin:18px auto 0">No hidden fees. No surprises. Every quote is free — and we always honour it.</p>
     </div>
     <div class="pricing-grid">

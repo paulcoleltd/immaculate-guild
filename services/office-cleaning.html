@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <meta name="description" content="Professional office cleaning Liverpool. Daily, weekly or bespoke schedules. DBS-checked cleaners, eco-friendly products. Workspaces maintained to the highest standard."/>
+  <title>Office Cleaning Liverpool | Immaculate Guild</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../css/global.css"/>
+  <style>
+    .service-hero {
+      padding: 160px 0 80px;
+      background: var(--navy); position: relative; overflow: hidden;
+    }
+    .service-hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(107,45,139,.25) 0%, transparent 60%);
+    }
+    .service-hero::after {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background-image: linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),
+                        linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);
+      background-size: 60px 60px;
+    }
+    .hero-inner { position: relative; z-index: 2; }
+    .breadcrumb {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 12px; color: rgba(255,255,255,.45); margin-bottom: 28px;
+      letter-spacing: .05em;
+    }
+    .breadcrumb a { color: rgba(255,255,255,.45); transition: color var(--transition); }
+    .breadcrumb a:hover { color: var(--gold); }
+    .breadcrumb span { color: rgba(255,255,255,.2); }
+    .service-hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(38px, 5.5vw, 64px); font-weight: 700;
+      color: #fff; line-height: 1.08; margin-bottom: 20px;
+    }
+    .service-hero h1 em { font-style: italic; color: var(--gold-lt); }
+    .service-hero p {
+      font-size: 17px; color: rgba(255,255,255,.7); line-height: 1.75;
+      max-width: 560px; margin-bottom: 40px;
+    }
+    .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+
+    .service-body { padding: 80px 0 100px; background: var(--white); }
+    .service-layout {
+      display: grid; grid-template-columns: 1fr 380px; gap: 80px; align-items: start;
+    }
+
+    .service-content h2 {
+      font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 700;
+      color: var(--navy); margin-bottom: 28px;
+    }
+    .service-content h3 {
+      font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 600;
+      color: var(--navy); margin: 44px 0 20px;
+    }
+    .service-content p {
+      font-size: 15.5px; color: var(--slate); line-height: 1.8; margin-bottom: 20px;
+    }
+
+    .includes-list { list-style: none; margin-bottom: 44px; }
+    .includes-list li {
+      display: flex; align-items: flex-start; gap: 14px;
+      padding: 13px 0; border-bottom: 1px solid rgba(13,27,42,.06);
+      font-size: 15px; color: var(--charcoal);
+    }
+    .includes-list li:last-child { border-bottom: none; }
+    .includes-list li svg {
+      width: 16px; height: 16px; stroke: var(--gold); stroke-width: 2;
+      fill: none; flex-shrink: 0; margin-top: 2px;
+    }
+
+    /* Schedule options */
+    .schedule-options { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin: 28px 0 44px; }
+    .schedule-option {
+      padding: 24px 20px; background: var(--off-white);
+      border: 1px solid rgba(13,27,42,.07); text-align: center;
+      transition: all var(--transition);
+    }
+    .schedule-option:hover { border-color: var(--gold); }
+    .schedule-option h4 { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; color: var(--navy); margin-bottom: 8px; }
+    .schedule-option p { font-size: 13px; color: var(--slate); line-height: 1.6; margin: 0; }
+
+    .trust-points { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; margin: 44px 0; }
+    .trust-point {
+      padding: 28px 24px; background: var(--off-white);
+      border-left: 2px solid var(--gold); text-align: left;
+    }
+    .trust-point svg { width: 24px; height: 24px; stroke: var(--gold); stroke-width: 1.5; fill: none; margin-bottom: 14px; }
+    .trust-point h4 { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 600; color: var(--navy); margin-bottom: 8px; }
+    .trust-point p { font-size: 13.5px; color: var(--slate); line-height: 1.65; margin: 0; }
+
+    .eco-banner {
+      background: linear-gradient(135deg, rgba(34,197,94,.08), rgba(16,185,129,.05));
+      border: 1px solid rgba(34,197,94,.2); padding: 24px 28px;
+      display: flex; align-items: flex-start; gap: 16px; margin: 44px 0;
+    }
+    .eco-banner svg { width: 24px; height: 24px; stroke: #22C55E; stroke-width: 1.5; fill: none; flex-shrink: 0; margin-top: 2px; }
+    .eco-banner strong { display: block; font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 4px; }
+    .eco-banner p { font-size: 14px; color: var(--slate); line-height: 1.65; margin: 0; }
+
+    .quote-sidebar { position: sticky; top: 96px; }
+    .quote-card {
+      background: var(--white); border: 1px solid rgba(13,27,42,.08);
+      border-top: 3px solid var(--gold); padding: 40px 36px;
+    }
+    .quote-card h3 {
+      font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 700;
+      color: var(--navy); margin-bottom: 6px;
+    }
+    .quote-card p { font-size: 13.5px; color: var(--slate); margin-bottom: 28px; }
+    .form-group { margin-bottom: 16px; }
+    .form-label { display: block; font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--navy); margin-bottom: 7px; }
+    .form-input {
+      width: 100%; padding: 13px 16px; border: 1px solid rgba(13,27,42,.12);
+      background: var(--off-white); font-size: 14.5px; color: var(--charcoal);
+      outline: none; transition: border-color var(--transition), background var(--transition);
+      border-radius: var(--radius); -webkit-appearance: none;
+    }
+    .form-input:focus { border-color: var(--gold); background: var(--white); }
+    .form-input::placeholder { color: rgba(107,114,128,.55); }
+    textarea.form-input { resize: vertical; min-height: 90px; }
+    .quote-submit { width: 100%; padding: 16px; font-size: 12.5px; letter-spacing: .14em; margin-top: 4px; }
+    .quote-assurance { margin-top: 16px; display: flex; flex-direction: column; gap: 7px; }
+    .qa-item { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: var(--slate); }
+    .qa-item svg { width: 13px; height: 13px; stroke: var(--gold); stroke-width: 2; fill: none; flex-shrink: 0; }
+
+    .related { padding: 80px 0; background: var(--pearl); }
+    .related h2 { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 700; color: var(--navy); margin-bottom: 44px; }
+    .related-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+    .related-card {
+      background: var(--white); padding: 36px 28px;
+      border: 1px solid rgba(13,27,42,.07); transition: all var(--transition);
+    }
+    .related-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(13,27,42,.08); }
+    .related-card h4 { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; color: var(--navy); margin-bottom: 10px; }
+    .related-card p { font-size: 14px; color: var(--slate); line-height: 1.7; margin-bottom: 20px; }
+    .related-link { font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); display: flex; align-items: center; gap: 6px; transition: gap var(--transition); }
+    .related-card:hover .related-link { gap: 12px; }
+
+    @media (max-width: 1024px) {
+      .service-layout { grid-template-columns: 1fr; }
+      .quote-sidebar { position: static; }
+      .trust-points { grid-template-columns: 1fr; }
+      .schedule-options { grid-template-columns: 1fr; }
+      .related-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      .related-grid { grid-template-columns: 1fr; }
+      .quote-card { padding: 32px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="../index.html" onclick="closeMobile()">Home</a>
+  <a href="residential.html" onclick="closeMobile()">Services</a>
+  <a href="../index.html#pricing" onclick="closeMobile()">Pricing</a>
+  <a href="../index.html#testimonials" onclick="closeMobile()">Reviews</a>
+  <a href="../index.html#contact" onclick="closeMobile()" style="color:var(--gold)">Get a Quote</a>
+</div>
+
+<nav id="nav">
+  <a href="../index.html" class="nav-logo">
+    <div class="shield"><span>IG</span></div>
+    <div class="name">Immaculate <span>Guild</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="../index.html#services">Services</a></li>
+    <li><a href="../index.html#pricing">Pricing</a></li>
+    <li><a href="../index.html#testimonials">Reviews</a></li>
+    <li><a href="../index.html#areas">Areas</a></li>
+    <li><a href="../index.html#contact">Contact</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="tel:01512345678" class="nav-tel">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.8" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 015.13 12.72 19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+      0151 234 5678
+    </a>
+    <a href="../index.html#contact" class="btn btn-gold" style="padding:11px 22px;font-size:11.5px;">Free Quote</a>
+  </div>
+  <div class="burger" id="burger" onclick="toggleMobile()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<section class="service-hero">
+  <div class="container hero-inner">
+    <div class="breadcrumb">
+      <a href="../index.html">Home</a>
+      <span>›</span>
+      <a href="#">Services</a>
+      <span>›</span>
+      Office Cleaning
+    </div>
+    <h1>Office Cleaning<br/><em>Liverpool & Merseyside</em></h1>
+    <p>Your workspace sets the tone for every meeting, every interaction, and every working day. We keep it consistently, reliably immaculate — so you never have to think about it.</p>
+    <div class="hero-ctas">
+      <a href="#quote" class="btn btn-gold">Get a Free Quote <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <a href="tel:01512345678" class="btn btn-ghost-white">Call Us Now</a>
+    </div>
+  </div>
+</section>
+
+<section class="service-body">
+  <div class="container">
+    <div class="service-layout">
+
+      <div class="service-content reveal">
+
+        <h2>A Workspace That Works<br/>as Hard as You Do.</h2>
+        <p>Studies consistently show that a clean, well-maintained office increases productivity, reduces sick days, and creates a more positive atmosphere for everyone in the building. But the reality is, most businesses settle for "acceptable" when they could have exceptional.</p>
+        <p>Immaculate Guild's office cleaning service delivers a consistent, verifiable standard every single visit. Dedicated teams, quality checklists, and flexible scheduling ensure your office always makes the right impression — on your team and your clients.</p>
+
+        <h3>Flexible Scheduling Options</h3>
+        <div class="schedule-options">
+          <div class="schedule-option">
+            <h4>Daily Clean</h4>
+            <p>Perfect for busy offices — full clean every morning before your team arrives, without disruption.</p>
+          </div>
+          <div class="schedule-option">
+            <h4>Weekly Clean</h4>
+            <p>Ideal for smaller offices — a thorough clean on your chosen day, every week, guaranteed.</p>
+          </div>
+          <div class="schedule-option">
+            <h4>Bespoke Schedule</h4>
+            <p>Built entirely around your office hours, shift patterns, and specific requirements.</p>
+          </div>
+        </div>
+
+        <h3>What's Included</h3>
+        <ul class="includes-list">
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Workstation cleaning — desks, monitors, keyboards, phones</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>All floors — vacuumed, mopped, and entrance mats maintained</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Meeting rooms cleaned and reset after every use</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Kitchen and break room — full clean and hygiene maintained</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Washrooms sanitised and consumables restocked</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Reception and waiting areas presented to client-facing standard</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Internal glass — partitions, doors, and windows</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>High-touch surfaces disinfected — door handles, light switches, lift buttons</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>All waste collected and bins relined throughout</li>
+        </ul>
+
+        <div class="eco-banner">
+          <svg viewBox="0 0 24 24"><path d="M12 22V12M12 12C10 9 7 7 7 5a5 5 0 0110 0c0 2-3 4-5 7z"/><path d="M8 19c-2.5-1-4-3-4-6"/><path d="M16 19c2.5-1 4-3 4-6"/></svg>
+          <div>
+            <strong>Healthier Office Air, Every Day</strong>
+            <p>Our eco-friendly, non-toxic products mean no harsh chemical residues on surfaces your team touches daily. Better for health, better for the environment — and COSHH-compliant.</p>
+          </div>
+        </div>
+
+        <h3>Why Office Managers Choose Us</h3>
+        <div class="trust-points">
+          <div class="trust-point">
+            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+            <h4>Dedicated Account Manager</h4>
+            <p>One point of contact for everything — scheduling, feedback, and any ad hoc requests handled immediately.</p>
+          </div>
+          <div class="trust-point">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            <h4>Documented Quality Checks</h4>
+            <p>We complete a signed checklist every visit. Full transparency — you know exactly what was done and when.</p>
+          </div>
+          <div class="trust-point">
+            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <h4>Fully Insured & Vetted</h4>
+            <p>All cleaners are DBS-checked, insured, and trained. Trusted with access to your premises, every time.</p>
+          </div>
+        </div>
+
+        <h3>Pricing</h3>
+        <p>Office cleaning contracts start from <strong style="color:var(--navy)">22£/hr</strong> per cleaner. We'll survey your premises and provide a detailed written quote based on size, frequency, and scope — fixed pricing with no surprises mid-contract.</p>
+        <a href="#quote" class="btn btn-gold" style="margin-top:8px">Get My Free Quote <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+
+      </div>
+
+      <aside class="quote-sidebar" id="quote">
+        <div class="quote-card reveal">
+          <h3>Get a Free Quote</h3>
+          <p>No obligation. We respond within 3 hours.</p>
+          <form>
+            <div class="form-group">
+              <label class="form-label">Full Name</label>
+              <input type="text" class="form-input" placeholder="Your name"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Phone Number</label>
+              <input type="tel" class="form-input" placeholder="Your number"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email Address</label>
+              <input type="email" class="form-input" placeholder="your@email.com"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Company Name</label>
+              <input type="text" class="form-input" placeholder="Your company"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Office Postcode</label>
+              <input type="text" class="form-input" placeholder="e.g. L1 1AA"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Preferred Frequency</label>
+              <select class="form-input">
+                <option value="">Select...</option>
+                <option>Daily (Mon–Fri)</option>
+                <option>3 Times Per Week</option>
+                <option>Weekly</option>
+                <option>Fortnightly</option>
+                <option>Custom / Bespoke</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Message (optional)</label>
+              <textarea class="form-input" placeholder="Office size, number of desks, specific areas..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-gold quote-submit">Send Quote Request</button>
+          </form>
+          <div class="quote-assurance">
+            <div class="qa-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Free quote — no obligation</div>
+            <div class="qa-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Response within 3 hours</div>
+            <div class="qa-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>All prices in £ sterling</div>
+            <div class="qa-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Eco-friendly, COSHH-compliant products</div>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</section>
+
+<section class="related">
+  <div class="container">
+    <h2 class="reveal">You Might Also Need</h2>
+    <div class="related-grid">
+      <div class="related-card reveal">
+        <h4>Commercial Cleaning</h4>
+        <p>Larger premises, industrial units, retail spaces, and multi-site contracts handled with the same high standard.</p>
+        <a href="commercial.html" class="related-link">Learn More →</a>
+      </div>
+      <div class="related-card reveal reveal-d1">
+        <h4>Deep Clean</h4>
+        <p>Quarterly or annual office deep clean — a comprehensive reset that goes far beyond regular maintenance.</p>
+        <a href="deep-clean.html" class="related-link">Learn More →</a>
+      </div>
+      <div class="related-card reveal reveal-d2">
+        <h4>End of Tenancy</h4>
+        <p>Vacating your office? We'll restore it to pristine condition and help you secure your deposit.</p>
+        <a href="end-of-tenancy.html" class="related-link">Learn More →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">Immaculate <span>Guild</span></div>
+        <div class="footer-tagline">Liverpool's Premier Cleaning Specialists</div>
+        <p class="footer-about">Delivering immaculate results to homes and businesses across Liverpool, Merseyside, and the North West.</p>
+        <div class="footer-contacts">
+          <a href="tel:01512345678" class="footer-contact-item"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 015.13 12.72 19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>0151 234 5678</a>
+          <a href="mailto:hello@immaculateguild.co.uk" class="footer-contact-item"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>hello@immaculateguild.co.uk</a>
+        </div>
+      </div>
+      <div class="footer-col"><h4>Services</h4><ul>
+        <li><a href="residential.html">Residential Cleaning</a></li>
+        <li><a href="commercial.html">Commercial Cleaning</a></li>
+        <li><a href="end-of-tenancy.html">End of Tenancy</a></li>
+        <li><a href="office-cleaning.html">Office Cleaning</a></li>
+        <li><a href="domestic-help.html">Domestic Help</a></li>
+        <li><a href="deep-clean.html">Deep Clean</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Company</h4><ul>
+        <li><a href="../index.html#standard">About Us</a></li>
+        <li><a href="../index.html#areas">Areas We Cover</a></li>
+        <li><a href="../index.html#testimonials">Testimonials</a></li>
+        <li><a href="../index.html#pricing">Pricing</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Get Help</h4><ul>
+        <li><a href="#quote">Free Quote</a></li>
+        <li><a href="../index.html#contact">Contact Us</a></li>
+        <li><a href="tel:01512345678">Call Us</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Immaculate Guild Ltd. Registered in England & Wales.</span>
+      <div class="footer-legal">
+        <a href="../privacy-policy.html">Privacy Policy</a>
+        <a href="../terms.html">Terms & Conditions</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>
