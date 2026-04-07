@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://immaculate-guild.vercel.app/sitemap.xml
+Sitemap: https://www.immaculateguild.co.uk/sitemap.xml
