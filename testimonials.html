@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <meta name="description" content="Read reviews from Immaculate Guild clients across Liverpool and Merseyside. Real results from real customers — residential, commercial and end of tenancy."/>
+  <title>Client Reviews | Immaculate Guild Liverpool</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/global.css"/>
+  <style>
+    .page-hero {
+      padding: 140px 0 80px;
+      background: var(--navy); position: relative; overflow: hidden;
+    }
+    .page-hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(184,145,68,.18) 0%, transparent 60%);
+    }
+    .page-hero::after {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background-image: linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),
+                        linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);
+      background-size: 60px 60px;
+    }
+    .page-hero-inner { position: relative; z-index: 2; }
+    .breadcrumb {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 12px; color: rgba(255,255,255,.45); margin-bottom: 24px;
+      letter-spacing: .05em;
+    }
+    .breadcrumb a { color: rgba(255,255,255,.45); transition: color .25s; }
+    .breadcrumb a:hover { color: var(--gold); }
+    .breadcrumb span { color: rgba(255,255,255,.2); }
+    .page-hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(38px, 5vw, 62px); font-weight: 700;
+      color: #fff; line-height: 1.08; margin-bottom: 20px;
+    }
+    .page-hero h1 em { font-style: italic; color: var(--gold-lt); }
+    .page-hero p { font-size: 17px; color: rgba(255,255,255,.68); line-height: 1.75; max-width: 540px; }
+
+    /* Summary bar */
+    .review-summary {
+      background: var(--off-white); padding: 36px 0; border-bottom: 1px solid rgba(13,27,42,.08);
+    }
+    .summary-inner { display: flex; gap: 48px; align-items: center; flex-wrap: wrap; }
+    .summary-score { text-align: center; }
+    .summary-score .big-num {
+      font-family: 'Cormorant Garamond', serif; font-size: 72px; font-weight: 700;
+      color: var(--navy); line-height: 1;
+    }
+    .summary-score .big-num span { color: var(--gold); }
+    .summary-score p { font-size: 12px; color: var(--slate); letter-spacing: .08em; text-transform: uppercase; }
+    .summary-divider { width: 1px; height: 80px; background: rgba(13,27,42,.1); }
+    .summary-stars { display: flex; gap: 6px; margin-bottom: 8px; }
+    .summary-stars svg { width: 20px; height: 20px; fill: var(--gold); }
+    .summary-label { font-size: 14px; color: var(--slate); }
+    .summary-label strong { color: var(--navy); }
+    .summary-platforms { display: flex; gap: 24px; flex-wrap: wrap; margin-top: 8px; }
+    .platform-badge {
+      font-size: 12px; color: var(--slate); letter-spacing: .06em;
+      border: 1px solid rgba(13,27,42,.1); padding: 6px 14px;
+    }
+
+    /* Reviews grid */
+    .reviews-body { padding: 88px 0 100px; background: var(--white); }
+    .reviews-filter { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 48px; }
+    .filter-btn {
+      padding: 9px 20px; border: 1px solid rgba(13,27,42,.15);
+      background: transparent; font-family: 'DM Sans', sans-serif;
+      font-size: 13px; color: var(--slate); cursor: pointer;
+      transition: all .2s; letter-spacing: .04em;
+    }
+    .filter-btn.active, .filter-btn:hover {
+      background: var(--navy); color: #fff; border-color: var(--navy);
+    }
+
+    .reviews-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+    .review-card {
+      padding: 36px 32px; border: 1px solid rgba(13,27,42,.08);
+      position: relative; transition: all .28s ease;
+    }
+    .review-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(13,27,42,.08); }
+    .review-card.featured {
+      background: var(--navy); border-color: transparent;
+      grid-column: span 2;
+    }
+    .review-stars { display: flex; gap: 3px; margin-bottom: 16px; }
+    .review-stars svg { width: 14px; height: 14px; fill: var(--gold); }
+    .review-quote {
+      font-family: 'Cormorant Garamond', serif; font-size: 19px; font-style: italic;
+      color: var(--charcoal); line-height: 1.65; margin-bottom: 24px;
+    }
+    .review-card.featured .review-quote { font-size: 24px; color: #fff; }
+    .review-meta { display: flex; align-items: center; gap: 12px; padding-top: 20px; border-top: 1px solid rgba(13,27,42,.07); }
+    .review-card.featured .review-meta { border-top-color: rgba(255,255,255,.1); }
+    .reviewer-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold) 0%, #a07830 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 700;
+      color: var(--navy); flex-shrink: 0;
+    }
+    .reviewer-name { font-size: 13.5px; font-weight: 600; color: var(--charcoal); }
+    .review-card.featured .reviewer-name { color: #fff; }
+    .reviewer-service { font-size: 12px; color: var(--slate); margin-top: 2px; }
+    .review-card.featured .reviewer-service { color: rgba(255,255,255,.5); }
+    .review-date { font-size: 11px; color: var(--slate); margin-left: auto; }
+    .review-card.featured .review-date { color: rgba(255,255,255,.35); }
+
+    /* CTA strip */
+    .review-cta { padding: 72px 0; background: var(--off-white); text-align: center; }
+    .review-cta h2 {
+      font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 700;
+      color: var(--navy); margin-bottom: 16px;
+    }
+    .review-cta p { font-size: 16px; color: var(--slate); margin-bottom: 36px; max-width: 500px; margin-left: auto; margin-right: auto; }
+    .review-cta .btn-row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+    @media (max-width: 1024px) {
+      .reviews-grid { grid-template-columns: 1fr 1fr; }
+      .review-card.featured { grid-column: span 2; }
+    }
+    @media (max-width: 640px) {
+      .reviews-grid { grid-template-columns: 1fr; }
+      .review-card.featured { grid-column: span 1; }
+      .summary-divider { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header id="header">
+  <div class="container header-inner">
+    <a href="index.html" class="logo">Immaculate <span>Guild</span></a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html#services">Services</a></li>
+        <li><a href="index.html#pricing">Pricing</a></li>
+        <li><a href="testimonials.html">Reviews</a></li>
+        <li><a href="areas.html">Areas</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <a href="index.html#contact" class="btn btn-primary nav-cta">Get a Quote</a>
+    <button class="hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ── HERO ── -->
+<section class="page-hero">
+  <div class="container page-hero-inner">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a><span>›</span><span>Client Reviews</span>
+    </div>
+    <h1>What Our Clients<br/><em>Actually Say</em></h1>
+    <p>Real reviews from real clients across Liverpool and Merseyside. No scripts, no filters — just honest feedback from the people we work for.</p>
+  </div>
+</section>
+
+<!-- ── SUMMARY BAR ── -->
+<div class="review-summary">
+  <div class="container">
+    <div class="summary-inner">
+      <div class="summary-score">
+        <div class="big-num">4<span>.9</span></div>
+        <p>Average Rating</p>
+      </div>
+      <div class="summary-divider"></div>
+      <div>
+        <div class="summary-stars">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <div class="summary-label"><strong>98% of clients</strong> would recommend us</div>
+        <div class="summary-platforms">
+          <span class="platform-badge">Google ★ 4.9</span>
+          <span class="platform-badge">Facebook ★ 5.0</span>
+          <span class="platform-badge">Trustpilot ★ 4.8</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── REVIEWS ── -->
+<section class="reviews-body">
+  <div class="container">
+
+    <div class="reviews-grid">
+
+      <!-- Featured -->
+      <div class="review-card featured reveal">
+        <div class="review-stars">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="review-quote">"I've used other cleaning companies before and the difference with Immaculate Guild is night and day. They came to our end of tenancy on time, worked through the whole property methodically, and the letting agent actually complimented the result. We got our full deposit back. Worth every penny."</p>
+        <div class="review-meta">
+          <div class="reviewer-avatar">S</div>
+          <div>
+            <div class="reviewer-name">Sarah M.</div>
+            <div class="reviewer-service">End of Tenancy — Aigburth, Liverpool</div>
+          </div>
+          <div class="review-date">March 2025</div>
+        </div>
+      </div>
+
+      <div class="review-card reveal">
+        <div class="review-stars">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="review-quote">"Our office on Dale Street has never been cleaner. They arrive early, work quietly, and leave everything spotless before our team gets in. Couldn't ask for more."</p>
+        <div class="review-meta">
+          <div class="reviewer-avatar">J</div>
+          <div>
+            <div class="reviewer-name">James R.</div>
+            <div class="reviewer-service">Office Cleaning — Liverpool City Centre</div>
+          </div>
+          <div class="review-date">Feb 2025</div>
+        </div>
+      </div>
+
+      <div class="review-card reveal">
+        <div class="review-stars">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="review-quote">"My house cleaner Emma is an absolute gem. She's been coming fortnightly for six months and I genuinely look forward to it. The house feels like a different place."</p>
+        <div class="review-meta">
+          <div class="reviewer-avatar">C</div>
+          <div>
+            <div class="reviewer-name">Claire T.</div>
+            <div class="reviewer-service">Residential — Mossley Hill</div>
+          </div>
+          <div class="review-date">Jan 2025</div>
+        </div>
+      </div>
+
+      <div class="review-card reveal">
+        <div class="review-stars">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="review-quote">"We booked the deep clean for our rental before new tenants moved in. Absolutely transformed the place. Bathrooms, oven, carpets — all done to a standard I couldn't have managed myself."</p>
+        <div class="review-meta">
+          <div class="reviewer-avatar">D</div>
+          <div>
+            <div class="reviewer-name">David L.</div>
+            <div class="reviewer-service">Deep Clean — Wavertree</div>
+          </div>
+          <div class="review-date">Dec 2024</div>
+        </div>
+      </div>
+
+      <div class="review-card reveal">
+        <div class="review-stars">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="review-quote">"As a letting agent I recommend Immaculate Guild to all our landlords. They're reliable, their EOT cleans stand up to our inventory checks every time, and they're always professional."</p>
+        <div class="review-meta">
+          <div class="reviewer-avatar">R</div>
+          <div>
+            <div class="reviewer-name">Rachel H.</div>
+            <div class="reviewer-service">Letting Agent Partner — Wirral</div>
+          </div>
+          <div class="review-date">Nov 2024</div>
+        </div>
+      </div>
+
+      <div class="review-card reveal">
+        <div class="review-stars">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="review-quote">"My domestic helper comes every week and honestly I can't imagine life without her now. She's part of the routine. Trustworthy, thorough, and genuinely lovely."</p>
+        <div class="review-meta">
+          <div class="reviewer-avatar">P</div>
+          <div>
+            <div class="reviewer-name">Patricia W.</div>
+            <div class="reviewer-service">Domestic Help — Woolton</div>
+          </div>
+          <div class="review-date">Oct 2024</div>
+        </div>
+      </div>
+
+      <div class="review-card reveal">
+        <div class="review-stars">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="review-quote">"Quoted fairly, arrived on time, did exactly what was agreed. Our retail unit looks brand new. Will be using them on a monthly basis going forward."</p>
+        <div class="review-meta">
+          <div class="reviewer-avatar">M</div>
+          <div>
+            <div class="reviewer-name">Marcus A.</div>
+            <div class="reviewer-service">Commercial — Bold Street, Liverpool</div>
+          </div>
+          <div class="review-date">Sep 2024</div>
+        </div>
+      </div>
+
+      <div class="review-card reveal">
+        <div class="review-stars">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="review-quote">"We had renovations done and the dust was everywhere. One deep clean later and it felt like moving into a new home. Brilliant service, brilliant team."</p>
+        <div class="review-meta">
+          <div class="reviewer-avatar">K</div>
+          <div>
+            <div class="reviewer-name">Karen &amp; Tom B.</div>
+            <div class="reviewer-service">Deep Clean (Post-Renovation) — Childwall</div>
+          </div>
+          <div class="review-date">Aug 2024</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<section class="review-cta">
+  <div class="container">
+    <h2 class="reveal">Join Our Happy Clients</h2>
+    <p class="reveal">Hundreds of Liverpool homes and businesses trust Immaculate Guild. Get your free quote today — no obligation, response within 3 hours.</p>
+    <div class="btn-row reveal">
+      <a href="index.html#contact" class="btn btn-primary">Get a Free Quote</a>
+      <a href="index.html#services" class="btn btn-secondary">View Our Services</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer id="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">Immaculate <span>Guild</span></div>
+        <div class="footer-tagline">Liverpool's Premier Cleaning Specialists</div>
+        <p class="footer-about">Delivering immaculate results to homes and businesses across Liverpool, Merseyside, and the North West.</p>
+        <div class="footer-contacts">
+          <a href="tel:01512345678" class="footer-contact-item"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 015.13 12.72 19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>0151 234 5678</a>
+          <a href="mailto:hello@immaculateguild.co.uk" class="footer-contact-item"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>hello@immaculateguild.co.uk</a>
+        </div>
+      </div>
+      <div class="footer-col"><h4>Services</h4><ul>
+        <li><a href="services/residential.html">Residential Cleaning</a></li>
+        <li><a href="services/commercial.html">Commercial Cleaning</a></li>
+        <li><a href="services/end-of-tenancy.html">End of Tenancy</a></li>
+        <li><a href="services/office-cleaning.html">Office Cleaning</a></li>
+        <li><a href="services/domestic-help.html">Domestic Help</a></li>
+        <li><a href="services/deep-clean.html">Deep Clean</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Company</h4><ul>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="areas.html">Areas We Cover</a></li>
+        <li><a href="testimonials.html">Testimonials</a></li>
+        <li><a href="index.html#pricing">Pricing</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Get Help</h4><ul>
+        <li><a href="index.html#contact">Free Quote</a></li>
+        <li><a href="index.html#contact">Contact Us</a></li>
+        <li><a href="tel:01512345678">Call Us</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Immaculate Guild Ltd. Registered in England &amp; Wales.</span>
+      <div class="footer-legal">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms.html">Terms &amp; Conditions</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

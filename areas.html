@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <meta name="description" content="Immaculate Guild covers Liverpool, Merseyside and the North West. Find out if we clean in your area — residential, commercial and specialist services."/>
+  <title>Areas We Cover | Immaculate Guild Liverpool</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/global.css"/>
+  <style>
+    .page-hero {
+      padding: 140px 0 80px;
+      background: var(--navy); position: relative; overflow: hidden;
+    }
+    .page-hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(184,145,68,.18) 0%, transparent 60%);
+    }
+    .page-hero::after {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background-image: linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),
+                        linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);
+      background-size: 60px 60px;
+    }
+    .page-hero-inner { position: relative; z-index: 2; }
+    .breadcrumb {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 12px; color: rgba(255,255,255,.45); margin-bottom: 24px;
+      letter-spacing: .05em;
+    }
+    .breadcrumb a { color: rgba(255,255,255,.45); transition: color .25s; }
+    .breadcrumb a:hover { color: var(--gold); }
+    .breadcrumb span { color: rgba(255,255,255,.2); }
+    .page-hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(38px, 5vw, 62px); font-weight: 700;
+      color: #fff; line-height: 1.08; margin-bottom: 20px;
+    }
+    .page-hero h1 em { font-style: italic; color: var(--gold-lt); }
+    .page-hero p { font-size: 17px; color: rgba(255,255,255,.68); line-height: 1.75; max-width: 560px; }
+
+    /* Areas grid */
+    .areas-body { padding: 88px 0 100px; background: var(--white); }
+    .areas-intro { max-width: 680px; margin-bottom: 64px; }
+    .areas-intro h2 {
+      font-family: 'Cormorant Garamond', serif; font-size: 42px; font-weight: 700;
+      color: var(--navy); margin-bottom: 16px;
+    }
+    .areas-intro p { font-size: 15.5px; color: var(--slate); line-height: 1.85; }
+
+    .areas-regions { display: grid; grid-template-columns: repeat(3,1fr); gap: 28px; margin-bottom: 80px; }
+    .region-card {
+      border: 1px solid rgba(13,27,42,.08); padding: 36px 32px;
+      position: relative; transition: all .28s ease;
+    }
+    .region-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(13,27,42,.08); }
+    .region-card.primary { border-top: 3px solid var(--gold); }
+    .region-label {
+      font-size: 10px; font-weight: 600; letter-spacing: .15em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 10px;
+    }
+    .region-card h3 {
+      font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 700;
+      color: var(--navy); margin-bottom: 20px;
+    }
+    .area-list { list-style: none; }
+    .area-list li {
+      font-size: 14px; color: var(--slate); padding: 6px 0;
+      border-bottom: 1px solid rgba(13,27,42,.05); display: flex; align-items: center; gap: 8px;
+    }
+    .area-list li:last-child { border-bottom: none; }
+    .area-list li::before {
+      content: ''; width: 5px; height: 5px; border-radius: 50%;
+      background: var(--gold); flex-shrink: 0;
+    }
+
+    /* Coverage note */
+    .coverage-note {
+      background: var(--off-white); padding: 40px 44px;
+      display: grid; grid-template-columns: auto 1fr; gap: 24px; align-items: start;
+      margin-bottom: 80px;
+    }
+    .coverage-note svg { width: 28px; height: 28px; stroke: var(--gold); stroke-width: 1.5; fill: none; flex-shrink: 0; margin-top: 2px; }
+    .coverage-note h4 {
+      font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 700;
+      color: var(--navy); margin-bottom: 8px;
+    }
+    .coverage-note p { font-size: 14.5px; color: var(--slate); line-height: 1.8; }
+
+    /* Area CTA */
+    .area-cta-strip {
+      background: var(--navy); padding: 56px 48px;
+      display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: center;
+    }
+    .area-cta-strip h3 {
+      font-family: 'Cormorant Garamond', serif; font-size: 30px; font-weight: 700;
+      color: #fff; margin-bottom: 8px;
+    }
+    .area-cta-strip p { font-size: 15px; color: rgba(255,255,255,.6); }
+    .area-cta-strip .btn-group { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    @media (max-width: 1024px) {
+      .areas-regions { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 680px) {
+      .areas-regions { grid-template-columns: 1fr; }
+      .area-cta-strip { grid-template-columns: 1fr; }
+      .coverage-note { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header id="header">
+  <div class="container header-inner">
+    <a href="index.html" class="logo">Immaculate <span>Guild</span></a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html#services">Services</a></li>
+        <li><a href="index.html#pricing">Pricing</a></li>
+        <li><a href="testimonials.html">Reviews</a></li>
+        <li><a href="areas.html">Areas</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <a href="index.html#contact" class="btn btn-primary nav-cta">Get a Quote</a>
+    <button class="hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ── HERO ── -->
+<section class="page-hero">
+  <div class="container page-hero-inner">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a><span>›</span><span>Areas We Cover</span>
+    </div>
+    <h1>Cleaning Across<br/><em>Liverpool &amp; Merseyside</em></h1>
+    <p>We serve homes and businesses across Liverpool city, the wider Merseyside region, and into the North West. Not sure if we cover your area? Get in touch — we'll let you know.</p>
+  </div>
+</section>
+
+<!-- ── AREAS BODY ── -->
+<section class="areas-body">
+  <div class="container">
+
+    <div class="areas-intro reveal">
+      <h2>Where We Work</h2>
+      <p>Based in Liverpool, we operate across the city and its surrounding areas. We cover a wide patch of Merseyside and can travel further for commercial contracts or specialist one-off cleans. If your area isn't listed, call us — we may still be able to help.</p>
+    </div>
+
+    <div class="areas-regions">
+
+      <div class="region-card primary reveal">
+        <div class="region-label">Primary Coverage</div>
+        <h3>Liverpool City</h3>
+        <ul class="area-list">
+          <li>Liverpool City Centre (L1–L3)</li>
+          <li>Aigburth &amp; Allerton</li>
+          <li>Anfield &amp; Everton</li>
+          <li>Childwall &amp; Wavertree</li>
+          <li>Edge Hill &amp; Kensington</li>
+          <li>Garston &amp; Speke</li>
+          <li>Mossley Hill &amp; Sefton Park</li>
+          <li>Old Swan &amp; Broadgreen</li>
+          <li>Toxteth &amp; Dingle</li>
+          <li>West Derby &amp; Norris Green</li>
+          <li>Woolton &amp; Gateacre</li>
+        </ul>
+      </div>
+
+      <div class="region-card primary reveal">
+        <div class="region-label">Primary Coverage</div>
+        <h3>Wirral &amp; South Merseyside</h3>
+        <ul class="area-list">
+          <li>Bebington &amp; Bromborough</li>
+          <li>Birkenhead &amp; Prenton</li>
+          <li>Heswall &amp; Greasby</li>
+          <li>Hoylake &amp; West Kirby</li>
+          <li>Neston &amp; Parkgate</li>
+          <li>Wallasey &amp; New Brighton</li>
+          <li>Formby &amp; Hightown</li>
+          <li>Crosby &amp; Waterloo</li>
+          <li>Litherland &amp; Bootle</li>
+        </ul>
+      </div>
+
+      <div class="region-card primary reveal">
+        <div class="region-label">Primary Coverage</div>
+        <h3>Knowsley &amp; St Helens</h3>
+        <ul class="area-list">
+          <li>Kirkby &amp; Huyton</li>
+          <li>Prescot &amp; Whiston</li>
+          <li>Halewood &amp; Tarbock</li>
+          <li>St Helens Town</li>
+          <li>Newton-le-Willows</li>
+          <li>Haydock &amp; Rainford</li>
+          <li>Rainhill &amp; Eccleston</li>
+        </ul>
+      </div>
+
+      <div class="region-card reveal">
+        <div class="region-label">Extended Coverage</div>
+        <h3>Sefton &amp; West Lancashire</h3>
+        <ul class="area-list">
+          <li>Southport &amp; Ainsdale</li>
+          <li>Ormskirk &amp; Skelmersdale</li>
+          <li>Maghull &amp; Melling</li>
+          <li>Burscough &amp; Rufford</li>
+          <li>Aintree &amp; Fazakerley</li>
+        </ul>
+      </div>
+
+      <div class="region-card reveal">
+        <div class="region-label">Extended Coverage</div>
+        <h3>Warrington &amp; Cheshire</h3>
+        <ul class="area-list">
+          <li>Warrington Town Centre</li>
+          <li>Widnes &amp; Runcorn</li>
+          <li>Northwich &amp; Winsford</li>
+          <li>Ellesmere Port</li>
+          <li>Chester (commercial enquiries)</li>
+        </ul>
+      </div>
+
+      <div class="region-card reveal">
+        <div class="region-label">On Request</div>
+        <h3>Further Afield</h3>
+        <ul class="area-list">
+          <li>Greater Manchester (commercial)</li>
+          <li>Wigan &amp; Bolton</li>
+          <li>Preston &amp; Chorley</li>
+          <li>North Wales (end of tenancy)</li>
+          <li>Other areas — enquire</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="coverage-note reveal">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <div>
+        <h4>Not sure if we cover your postcode?</h4>
+        <p>Our coverage area is always expanding. If your location isn't listed above, don't assume we can't help — call us on <a href="tel:01512345678" style="color:var(--gold)">0151 234 5678</a> or email <a href="mailto:hello@immaculateguild.co.uk" style="color:var(--gold)">hello@immaculateguild.co.uk</a> and we'll confirm availability within the hour. For commercial contracts, we're willing to travel significantly further.</p>
+      </div>
+    </div>
+
+    <div class="area-cta-strip reveal">
+      <div>
+        <h3>We Cover Your Area — Let's Get Started</h3>
+        <p>Get a free, no-obligation quote for your home or business today.</p>
+      </div>
+      <div class="btn-group">
+        <a href="index.html#contact" class="btn btn-primary">Get a Free Quote</a>
+        <a href="tel:01512345678" class="btn btn-ghost-white">Call Us Now</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer id="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">Immaculate <span>Guild</span></div>
+        <div class="footer-tagline">Liverpool's Premier Cleaning Specialists</div>
+        <p class="footer-about">Delivering immaculate results to homes and businesses across Liverpool, Merseyside, and the North West.</p>
+        <div class="footer-contacts">
+          <a href="tel:01512345678" class="footer-contact-item"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 015.13 12.72 19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>0151 234 5678</a>
+          <a href="mailto:hello@immaculateguild.co.uk" class="footer-contact-item"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>hello@immaculateguild.co.uk</a>
+        </div>
+      </div>
+      <div class="footer-col"><h4>Services</h4><ul>
+        <li><a href="services/residential.html">Residential Cleaning</a></li>
+        <li><a href="services/commercial.html">Commercial Cleaning</a></li>
+        <li><a href="services/end-of-tenancy.html">End of Tenancy</a></li>
+        <li><a href="services/office-cleaning.html">Office Cleaning</a></li>
+        <li><a href="services/domestic-help.html">Domestic Help</a></li>
+        <li><a href="services/deep-clean.html">Deep Clean</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Company</h4><ul>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="areas.html">Areas We Cover</a></li>
+        <li><a href="testimonials.html">Testimonials</a></li>
+        <li><a href="index.html#pricing">Pricing</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Get Help</h4><ul>
+        <li><a href="index.html#contact">Free Quote</a></li>
+        <li><a href="index.html#contact">Contact Us</a></li>
+        <li><a href="tel:01512345678">Call Us</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Immaculate Guild Ltd. Registered in England &amp; Wales.</span>
+      <div class="footer-legal">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms.html">Terms &amp; Conditions</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <meta name="description" content="About Immaculate Guild — Liverpool's trusted professional cleaning specialists. Meet our team, our story, and the values behind every clean."/>
+  <title>About Us | Immaculate Guild Liverpool</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/global.css"/>
+  <style>
+    .page-hero {
+      padding: 140px 0 80px;
+      background: var(--navy); position: relative; overflow: hidden;
+    }
+    .page-hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(184,145,68,.18) 0%, transparent 60%);
+    }
+    .page-hero::after {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background-image: linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),
+                        linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);
+      background-size: 60px 60px;
+    }
+    .page-hero-inner { position: relative; z-index: 2; }
+    .breadcrumb {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 12px; color: rgba(255,255,255,.45); margin-bottom: 24px;
+      letter-spacing: .05em;
+    }
+    .breadcrumb a { color: rgba(255,255,255,.45); transition: color .25s; }
+    .breadcrumb a:hover { color: var(--gold); }
+    .breadcrumb span { color: rgba(255,255,255,.2); }
+    .page-hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(38px, 5vw, 62px); font-weight: 700;
+      color: #fff; line-height: 1.08; margin-bottom: 20px;
+    }
+    .page-hero h1 em { font-style: italic; color: var(--gold-lt); }
+    .page-hero p {
+      font-size: 17px; color: rgba(255,255,255,.68); line-height: 1.75; max-width: 560px;
+    }
+
+    /* Story section */
+    .story { padding: 88px 0 80px; background: var(--white); }
+    .story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .story-visual {
+      background: var(--navy); aspect-ratio: 4/3; position: relative; overflow: hidden;
+    }
+    .story-visual::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(184,145,68,.2) 0%, transparent 70%);
+    }
+    .story-monogram {
+      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 12px;
+    }
+    .story-monogram .shield-lg {
+      width: 80px; height: 88px;
+      background: linear-gradient(135deg, var(--gold) 0%, #a07830 100%);
+      clip-path: polygon(50% 0%, 100% 18%, 100% 68%, 50% 100%, 0% 68%, 0% 18%);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .story-monogram .shield-lg span {
+      font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 700;
+      color: var(--navy); letter-spacing: .05em;
+    }
+    .story-monogram p {
+      font-family: 'Cormorant Garamond', serif; font-size: 18px;
+      color: rgba(255,255,255,.6); letter-spacing: .15em; text-transform: uppercase;
+    }
+    .story-text h2 {
+      font-family: 'Cormorant Garamond', serif; font-size: 42px; font-weight: 700;
+      color: var(--navy); line-height: 1.1; margin-bottom: 28px;
+    }
+    .story-text h2 em { font-style: italic; color: var(--gold); }
+    .story-text p {
+      font-size: 15.5px; color: var(--slate); line-height: 1.85; margin-bottom: 20px;
+    }
+    .story-stats {
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; margin-top: 44px;
+    }
+    .stat-block { text-align: center; padding: 24px 16px; background: var(--off-white); }
+    .stat-block .num {
+      font-family: 'Cormorant Garamond', serif; font-size: 42px; font-weight: 700;
+      color: var(--navy); line-height: 1;
+    }
+    .stat-block .num span { color: var(--gold); }
+    .stat-block p { font-size: 12px; color: var(--slate); letter-spacing: .08em; text-transform: uppercase; margin-top: 6px; }
+
+    /* Values section */
+    .values { padding: 88px 0; background: var(--off-white); }
+    .values h2 {
+      font-family: 'Cormorant Garamond', serif; font-size: 42px; font-weight: 700;
+      color: var(--navy); margin-bottom: 12px;
+    }
+    .values > .container > p { font-size: 16px; color: var(--slate); max-width: 560px; margin-bottom: 56px; line-height: 1.75; }
+    .values-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 28px; }
+    .value-card {
+      background: var(--white); padding: 40px 32px;
+      border-top: 3px solid var(--gold);
+    }
+    .value-card .icon {
+      width: 48px; height: 48px; background: rgba(201,168,76,.1);
+      display: flex; align-items: center; justify-content: center; margin-bottom: 20px;
+    }
+    .value-card .icon svg { width: 22px; height: 22px; stroke: var(--gold); stroke-width: 1.5; fill: none; }
+    .value-card h3 {
+      font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 700;
+      color: var(--navy); margin-bottom: 12px;
+    }
+    .value-card p { font-size: 14.5px; color: var(--slate); line-height: 1.8; }
+
+    /* Team / Promise */
+    .promise { padding: 88px 0; background: var(--white); }
+    .promise-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+    .promise-content h2 {
+      font-family: 'Cormorant Garamond', serif; font-size: 42px; font-weight: 700;
+      color: var(--navy); margin-bottom: 24px; line-height: 1.1;
+    }
+    .promise-content p { font-size: 15.5px; color: var(--slate); line-height: 1.85; margin-bottom: 20px; }
+    .promise-list { list-style: none; margin-top: 32px; }
+    .promise-list li {
+      display: flex; align-items: flex-start; gap: 14px;
+      padding: 14px 0; border-bottom: 1px solid rgba(13,27,42,.06);
+      font-size: 15px; color: var(--charcoal); line-height: 1.6;
+    }
+    .promise-list li:last-child { border-bottom: none; }
+    .promise-list li svg { width: 16px; height: 16px; stroke: var(--gold); stroke-width: 2; fill: none; flex-shrink: 0; margin-top: 2px; }
+    .promise-cta { margin-top: 40px; display: flex; gap: 14px; flex-wrap: wrap; }
+
+    .promise-panel {
+      background: var(--navy); padding: 48px 40px; position: relative; overflow: hidden;
+    }
+    .promise-panel::before {
+      content: '"'; position: absolute; top: -20px; left: 24px;
+      font-family: 'Cormorant Garamond', serif; font-size: 180px; font-weight: 700;
+      color: rgba(201,168,76,.08); line-height: 1;
+    }
+    .promise-panel blockquote {
+      font-family: 'Cormorant Garamond', serif; font-size: 26px; font-style: italic;
+      color: #fff; line-height: 1.55; margin-bottom: 32px; position: relative; z-index: 1;
+    }
+    .promise-panel cite {
+      font-size: 13px; color: var(--gold); letter-spacing: .1em; text-transform: uppercase;
+      font-style: normal; display: block;
+    }
+    .promise-badges { display: flex; flex-direction: column; gap: 12px; margin-top: 40px; }
+    .promise-badge {
+      display: flex; align-items: center; gap: 12px;
+      padding: 14px 18px; background: rgba(255,255,255,.05);
+    }
+    .promise-badge svg { width: 18px; height: 18px; stroke: var(--gold); stroke-width: 1.5; fill: none; flex-shrink: 0; }
+    .promise-badge span { font-size: 13.5px; color: rgba(255,255,255,.8); }
+
+    /* CTA strip */
+    .about-cta {
+      padding: 72px 0; background: var(--navy); text-align: center;
+    }
+    .about-cta h2 {
+      font-family: 'Cormorant Garamond', serif; font-size: 42px; font-weight: 700;
+      color: #fff; margin-bottom: 16px;
+    }
+    .about-cta p { font-size: 16px; color: rgba(255,255,255,.6); margin-bottom: 36px; }
+    .about-cta .btn-row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+    @media (max-width: 1024px) {
+      .story-grid, .promise-grid { grid-template-columns: 1fr; }
+      .values-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 640px) {
+      .values-grid { grid-template-columns: 1fr; }
+      .story-stats { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header id="header">
+  <div class="container header-inner">
+    <a href="index.html" class="logo">Immaculate <span>Guild</span></a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html#services">Services</a></li>
+        <li><a href="index.html#pricing">Pricing</a></li>
+        <li><a href="index.html#testimonials">Reviews</a></li>
+        <li><a href="areas.html">Areas</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <a href="index.html#contact" class="btn btn-primary nav-cta">Get a Quote</a>
+    <button class="hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ── HERO ── -->
+<section class="page-hero">
+  <div class="container page-hero-inner">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a><span>›</span><span>About Us</span>
+    </div>
+    <h1>Built on a Simple Belief:<br/><em>Your Space Deserves Better</em></h1>
+    <p>Immaculate Guild was founded by cleaners who were tired of mediocre standards. We set out to build a cleaning company Liverpool could actually be proud of.</p>
+  </div>
+</section>
+
+<!-- ── OUR STORY ── -->
+<section class="story">
+  <div class="container">
+    <div class="story-grid">
+      <div class="story-visual reveal">
+        <div class="story-monogram">
+          <div class="shield-lg"><span>IG</span></div>
+          <p>Est. Liverpool</p>
+        </div>
+      </div>
+      <div class="story-text reveal">
+        <h2>A Liverpool Company,<br/><em>Through and Through</em></h2>
+        <p>Immaculate Guild grew from a single conviction: that professional cleaning in Liverpool deserved to be done with real craft, real care, and real accountability. Not a franchise model, not a race to the bottom on price — a genuine service run by people who take pride in their work.</p>
+        <p>We started with residential homes and quickly became the team that landlords, letting agents, business owners, and homeowners trust to get the job done properly. Every member of our team is personally selected, trained to our standard, and DBS checked — because when someone enters your home or business, that trust matters.</p>
+        <p>Today we operate across Liverpool and Merseyside, delivering six specialist services that cover every cleaning need from weekly home help to full commercial contracts.</p>
+        <div class="story-stats">
+          <div class="stat-block reveal">
+            <div class="num">500<span>+</span></div>
+            <p>Homes & Businesses Cleaned</p>
+          </div>
+          <div class="stat-block reveal">
+            <div class="num">98<span>%</span></div>
+            <p>Client Satisfaction Rate</p>
+          </div>
+          <div class="stat-block reveal">
+            <div class="num">6</div>
+            <p>Specialist Services</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── VALUES ── -->
+<section class="values">
+  <div class="container">
+    <h2 class="reveal">What We Stand For</h2>
+    <p class="reveal">Three values sit at the core of everything we do. They're not marketing copy — they're the standard every clean is held to.</p>
+    <div class="values-grid">
+      <div class="value-card reveal">
+        <div class="icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>Trusted</h3>
+        <p>Every cleaner is DBS-checked, reference-verified, and fully insured before they set foot in your property. We take the responsibility of access seriously — and we honour it every single visit.</p>
+      </div>
+      <div class="value-card reveal">
+        <div class="icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <h3>Transparent</h3>
+        <p>No hidden fees. No vague quotes. No day-of surprises. We give you a clear price upfront, we explain exactly what's included, and we honour that commitment — every time.</p>
+      </div>
+      <div class="value-card reveal">
+        <div class="icon">
+          <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+        </div>
+        <h3>Tailored</h3>
+        <p>No two properties are the same. We listen, we assess, and we build a clean around your specific needs — not a one-size-fits-all package designed for the average customer.</p>
+      </div>
+      <div class="value-card reveal">
+        <div class="icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22V12M12 12C10 9 7 7 7 5a5 5 0 0110 0c0 2-3 4-5 7z"/><path d="M8 19c-2.5-1-4-3-4-6"/><path d="M16 19c2.5-1 4-3 4-6"/></svg>
+        </div>
+        <h3>Eco-Conscious</h3>
+        <p>Every product we use is eco-friendly, non-toxic, and safe for children, pets, and the environment. We refuse to compromise on results, but we won't do it at the planet's expense.</p>
+      </div>
+      <div class="value-card reveal">
+        <div class="icon">
+          <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <h3>Consistent</h3>
+        <p>The same high standard, every visit. We assign dedicated cleaners to recurring clients so you always know who's coming — and they know exactly how you like things done.</p>
+      </div>
+      <div class="value-card reveal">
+        <div class="icon">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h3>Guaranteed</h3>
+        <p>Not satisfied? We come back and put it right — no questions, no charge. Our 100% satisfaction guarantee isn't a policy statement, it's a promise we keep.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── OUR PROMISE ── -->
+<section class="promise">
+  <div class="container">
+    <div class="promise-grid">
+      <div class="promise-content reveal">
+        <h2>What You Can Always Expect</h2>
+        <p>We've built Immaculate Guild around the things that actually matter to clients — not the things that look good in a brochure. Here's what every client gets, every time, without having to ask:</p>
+        <ul class="promise-list">
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>A confirmed arrival window — no vague "between 8am and 6pm" windows</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>The same cleaner each visit for recurring services</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Eco-friendly, non-toxic products on every clean</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>A 3-hour response to all enquiries</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>An honest quote before any work begins</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>A satisfaction guarantee on every service</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Respectful, professional conduct in your space at all times</li>
+        </ul>
+        <div class="promise-cta">
+          <a href="index.html#contact" class="btn btn-primary">Get a Free Quote</a>
+          <a href="index.html#services" class="btn btn-secondary">View All Services</a>
+        </div>
+      </div>
+      <div class="promise-panel reveal">
+        <blockquote>"We won't send anyone to your home that we wouldn't trust in our own."</blockquote>
+        <cite>— Immaculate Guild, Liverpool</cite>
+        <div class="promise-badges">
+          <div class="promise-badge">
+            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <span>All staff DBS checked &amp; reference verified</span>
+          </div>
+          <div class="promise-badge">
+            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+            <span>Fully insured — public liability &amp; employer's liability</span>
+          </div>
+          <div class="promise-badge">
+            <svg viewBox="0 0 24 24"><path d="M12 22V12M12 12C10 9 7 7 7 5a5 5 0 0110 0c0 2-3 4-5 7z"/></svg>
+            <span>100% eco-friendly products — safe for families &amp; pets</span>
+          </div>
+          <div class="promise-badge">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span>Response to all enquiries within 3 hours</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<section class="about-cta">
+  <div class="container">
+    <h2 class="reveal">Ready to Experience the Difference?</h2>
+    <p class="reveal">Join hundreds of Liverpool homes and businesses who've made the switch to Immaculate Guild.</p>
+    <div class="btn-row reveal">
+      <a href="index.html#contact" class="btn btn-primary">Get Your Free Quote</a>
+      <a href="tel:01512345678" class="btn btn-ghost-white">Call 0151 234 5678</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer id="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">Immaculate <span>Guild</span></div>
+        <div class="footer-tagline">Liverpool's Premier Cleaning Specialists</div>
+        <p class="footer-about">Delivering immaculate results to homes and businesses across Liverpool, Merseyside, and the North West.</p>
+        <div class="footer-contacts">
+          <a href="tel:01512345678" class="footer-contact-item"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 015.13 12.72 19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>0151 234 5678</a>
+          <a href="mailto:hello@immaculateguild.co.uk" class="footer-contact-item"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>hello@immaculateguild.co.uk</a>
+        </div>
+      </div>
+      <div class="footer-col"><h4>Services</h4><ul>
+        <li><a href="services/residential.html">Residential Cleaning</a></li>
+        <li><a href="services/commercial.html">Commercial Cleaning</a></li>
+        <li><a href="services/end-of-tenancy.html">End of Tenancy</a></li>
+        <li><a href="services/office-cleaning.html">Office Cleaning</a></li>
+        <li><a href="services/domestic-help.html">Domestic Help</a></li>
+        <li><a href="services/deep-clean.html">Deep Clean</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Company</h4><ul>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="areas.html">Areas We Cover</a></li>
+        <li><a href="testimonials.html">Testimonials</a></li>
+        <li><a href="index.html#pricing">Pricing</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Get Help</h4><ul>
+        <li><a href="index.html#contact">Free Quote</a></li>
+        <li><a href="index.html#contact">Contact Us</a></li>
+        <li><a href="tel:01512345678">Call Us</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Immaculate Guild Ltd. Registered in England &amp; Wales.</span>
+      <div class="footer-legal">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms.html">Terms &amp; Conditions</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
